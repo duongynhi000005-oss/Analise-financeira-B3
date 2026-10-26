@@ -116,18 +116,18 @@ poetry run pytest -q
 
 ### Quickstart end-to-end
 
-Use este fluxo para reproduzir ingest → persist → snapshot → notebook:
+Use este fluxo para reproduzir ingest → persist → snapshot → notebook (`main` é o console script instalado pelo Poetry):
 
 ```bash
 cp .env.example .env
 poetry install
 poetry run main --help
-poetry run main --ticker PETR4 --force-refresh
+poetry run main run --ticker PETR4 --force-refresh
 ```
 
 Tickers de exemplo: `PETR4`, `VALE3`, `ITUB4`.
 
-Saídas esperadas:
+Saídas esperadas (os diretórios `dados/`, `raw/` e `snapshots/` são criados automaticamente na primeira execução):
 
 - `dados/data.db` → SQLite principal
 - `raw/<provider>/` → CSV bruto do provider
@@ -144,7 +144,7 @@ Variáveis mínimas em `.env`:
 Troubleshooting rápido:
 
 - `poetry: command not found` → instale o Poetry antes de seguir o quickstart
-- `main --help` falha por import/local env → rode `python -m src.main --help`
+- `main --help` falha por erro de import/local env → rode `python -m src.main --help`
 - Sem arquivos novos em `snapshots/` ou `raw/` → repita o comando com `--force-refresh`
 
 ### Modo de testes de rede (NETWORK_MODE)
